@@ -5,8 +5,6 @@
 # 4. Repeat in next empty square
 # 5. Backtrack when error encountered
 
-import numpy as np
-
 grid = [[5, 3, 0, 0, 7, 0, 0, 0, 0],
         [6, 0, 0, 1, 9, 5, 0, 0, 0],
         [0, 9, 8, 0, 0, 0, 0, 6, 0],
@@ -16,6 +14,29 @@ grid = [[5, 3, 0, 0, 7, 0, 0, 0, 0],
         [0, 6, 0, 0, 0, 0, 2, 8, 0],
         [0, 0, 0, 4, 1, 9, 0, 0, 5],
         [0, 0, 0, 0, 8, 0, 0, 7, 9]]
+
+blank_grid = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+
+def print_grid(gr):
+    for i in range(len(gr)):
+        if i % 3 == 0 and i != 0:
+            print("- - - - - - - - - - - -")
+        for j in range(len(gr[0])):
+            if j % 3 == 0 and j != 0:
+                print(" | ", end="")  # end="" means not default new line -> \n
+            if j == 8:
+                print(gr[i][j])
+            else:
+                print(str(gr[i][j]) + " ", end="")
 
 
 # y & x -> position, across from left then down from top
@@ -49,11 +70,11 @@ def solve():
                         solve()
                         grid[x][y] = 0  # backtracking
                 return
-    print(np.matrix(grid))
+    print_grid(grid)
     input("Find another solution?")
 
 
-print(np.matrix(grid))
+print_grid(grid)
 print()
 solve()
 print("There are no more solutions")
